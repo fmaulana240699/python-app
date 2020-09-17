@@ -1,9 +1,20 @@
 pipeline {
   agent any
   stages {
-    stage('Build Image') {
-      steps {
-        sh 'docker build -t testing-pipeline . '
+    stage('Cloning Source') {
+      parallel {
+        stage('Cloning Source') {
+          steps {
+            git(url: 'https://github.com/fmaulana240699/docker-pipeline.git', branch: 'master', credentialsId: 'fmaulana24')
+          }
+        }
+
+        stage('Build Image') {
+          steps {
+            sh 'docker build -t testing-pipeline . '
+          }
+        }
+
       }
     }
 
