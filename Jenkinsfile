@@ -11,6 +11,7 @@ pipeline {
 
         stage('Build Image') {
           steps {
+            sh 'ls -a'
             sh 'docker build -t testing-pipeline . '
           }
         }
